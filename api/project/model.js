@@ -6,7 +6,7 @@ module.exports = {
         return db('projects')
     },
     getProjectsById(id) {
-        return db('projects').where('id', id).first()
+        return db('projects').where('project_id', id).first()
     },
 
     insertProject(project) {

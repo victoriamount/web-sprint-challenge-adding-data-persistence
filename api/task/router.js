@@ -22,6 +22,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    const { newTask } = req.body
+    if (!newTask.description) {
+        res.status(500).json('No description provided')
+    }
     Tasks.insertTask(req.body)
         .then(newId => {
             Tasks.getTasksById(newId)
@@ -38,9 +42,6 @@ router.post('/', (req, res) => {
                     res.status(500).json(err.message)
                 })
         })
-        // .then(response => {
-        //     res.json(response)
-        // })
         .catch(err => {
             res.status(500).json(err.message)
         })

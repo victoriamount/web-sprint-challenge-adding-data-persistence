@@ -2,7 +2,7 @@
 exports.up = function(knex) {
   return knex.schema
     .createTable('projects', table => {
-        table.increments('id')
+        table.increments('project_id')
         table.string('name', 128).notNullable()
         table.string('description')
         table.boolean('completed').defaultTo(0)
@@ -19,14 +19,14 @@ exports.up = function(knex) {
         table.boolean('completed').defaultTo(0)
         table.integer('project_id')
             .unsigned().notNullable()
-            .references('id').inTable('projects')
+            .references('project_id').inTable('projects')
             .onDelete('RESTRICT').onUpdate('RESTRICT')
     })
     .createTable('project_resources', table => {
         table.increments('project_resource_id')
         table.integer('project_id')
             .unsigned().notNullable()
-            .references('id').inTable('projects')
+            .references('project_id').inTable('projects')
             .onDelete('RESTRICT').onUpdate('RESTRICT')
         table.integer('resource_id')
             .unsigned().notNullable()
