@@ -32,6 +32,8 @@ describe('server.js', () => {
   // 👉 PROJECTS
   describe('projects endpoints', () => {
     beforeEach(async () => {
+      await db('tasks').truncate()
+      await db('resources').truncate()
       await db('projects').truncate()
       await db('projects').insert(projectA)
       await db('projects').insert({ ...projectB, completed: 1 })
@@ -90,7 +92,9 @@ describe('server.js', () => {
   // 👉 RESOURCES
   describe('resources endpoints', () => {
     beforeEach(async () => {
+      await db('tasks').truncate()
       await db('resources').truncate()
+      await db('projects').truncate()
       await db('resources').insert(resourceA)
       await db('resources').insert(resourceB)
     })
